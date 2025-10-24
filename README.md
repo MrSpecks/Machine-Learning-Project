@@ -34,7 +34,7 @@ This project provides a **refactored, production-ready** analysis of the Kaggle 
 ### Installation Steps
 1. **Clone/Download Repository:**
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/MrSpecks/Machine-Learning-Project
    cd Machine-Learning-Project
    ```
 
@@ -270,10 +270,9 @@ price_stats = get_price_distribution_stats(filtered_df)
 
 **Full Name:** Kagiso Mfusi  
 **Email:** Kagisomfusi@outlook.com  
-**Mobile:** 0696287623  
 **LinkedIn:** [https://www.linkedin.com/in/kagiso-mfusi-95b329224](https://www.linkedin.com/in/kagiso-mfusi-95b329224)  
-**Project Date:** October 2024  
-**Assessment:** Machine Learning Developer Intern Technical Assessment
+**Project Date:** October 24, 2025 
+**Assessment:** Machine Learning Developer Technical Assessment
 
 ## 📄 License
 This project is created for educational and assessment purposes only. The dataset is sourced from Kaggle's public House Prices competition.
