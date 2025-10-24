@@ -1,0 +1,105 @@
+Convert the analysis from @Housing_EDA_Refactored.ipynb into a professional Streamlit dashboard titled 'streamlit_app.py'.
+
+The dashboard must use the helper functions from housing_data_loader.py to load and prepare the data, and functions from housing_analysis_metrics.py to perform calculations.
+
+Layout Structure
+
+Header: Ames Housing Market Dashboard
+
+Sidebar: Global Filters
+
+Create a sidebar section for all user filters.
+
+Neighborhood: st.multiselect (Allow user to select one or more neighborhoods).
+
+Overall Quality: st.slider (Range 1-10).
+
+Year Sold: st.multiselect (Options: 2006, 2007, 2008, 2009, 2010).
+
+Price Range: st.slider (For SalePrice).
+
+All metrics and charts on the dashboard MUST update based on these filters.
+
+KPI Row (Top): 4 cards showing metrics for the filtered data.
+
+Median Sale Price:
+
+Show trend indicator (green arrow up / red arrow down) comparing the filtered median to the overall dataset median.
+
+Avg. Price per SqFt: (Calculated as SalePrice / GrLivArea).
+
+Show trend indicator comparing to the overall dataset average.
+
+Total Properties Sold: (A count of rows in the filtered data).
+
+Show trend indicator comparing to the total properties in the unfiltered data.
+
+Average Overall Quality:
+
+Show trend indicator comparing to the overall dataset average.
+
+Charts Grid (2x2 Layout):
+
+Top-Left: Price vs. Size (Scatter Plot)
+
+GrLivArea (x-axis) vs. SalePrice (y-axis).
+
+Color-code the dots based on OverallQual.
+
+Include a regression trendline.
+
+Title: Price vs. Living Area (Colored by Quality)
+
+Top-Right: Sale Price Distribution by Neighborhood (Box Plot)
+
+Neighborhood (x-axis) vs. SalePrice (y-axis).
+
+Only show neighborhoods selected in the filter.
+
+Sort the box plots by median SalePrice (descending).
+
+Title: Sale Price Distribution by Neighborhood
+
+Bottom-Left: Median Price by Quality (Bar Chart)
+
+OverallQual (x-axis, 1-10) vs. Median SalePrice (y-axis).
+
+Y-axis formatted as dollars (e.g., "$150K").
+
+Title: Median Sale Price by Overall Quality
+
+Bottom-Right: Key Feature Correlation Heatmap (Heatmap)
+
+Show a correlation heatmap of the Top 10-15 features (including your engineered ones like TotalSF, TotalBath, QualitySize) against SalePrice.
+
+This heatmap should be dynamic and recalculate based on the filtered data.
+
+Title: Key Feature Correlation with SalePrice
+
+Bottom Row: Additional Stats (2 Cards)
+
+Average Age of Property:
+
+Calculated as YrSold - YearBuilt.
+
+Show large number (e.g., "35.2 Years").
+
+Subtitle: "Average Property Age at Sale"
+
+Average Garage Capacity (Cars):
+
+Show large number (e.g., "2.1 Cars").
+
+Subtitle: "Average Garage Capacity"
+
+Key Requirements
+
+Use Plotly for all charts to make them interactive.
+
+All filters in the sidebar must update all KPIs and charts correctly.
+
+Use functions from the .py modules for loading, feature engineering, and calculations. Do not repeat code in the dashboard file.
+
+Ensure professional styling, with clear titles and formatting for dollar amounts (e.S., $210K) and square footage.
+
+The dashboard should be clean, fast, and provide clear insights for a potential home buyer, seller, or real estate agent.
