@@ -321,7 +321,7 @@ def main():
         )
         
         fig_bar.update_layout(height=400)
-        fig_bar.update_yaxis(tickformat='$,.0f')
+        fig_bar.update_yaxes(tickformat='$,.0f')
         st.plotly_chart(fig_bar, use_container_width=True)
     
     with col4:
