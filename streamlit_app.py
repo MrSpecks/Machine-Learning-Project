@@ -49,6 +49,55 @@ st.markdown("""
         border-radius: 0.5rem;
         border-left: 4px solid #1f77b4;
     }
+    .kpi-card {
+        background-color: #ffffff;
+        padding: 1.5rem;
+        border-radius: 0.75rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+        border: 1px solid #e1e5e9;
+        margin-bottom: 1rem;
+        transition: box-shadow 0.2s ease-in-out;
+    }
+    .kpi-card:hover {
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15), 0 3px 6px rgba(0, 0, 0, 0.1);
+    }
+    .kpi-title {
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: #6c757d;
+        margin-bottom: 0.5rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    .kpi-value {
+        font-size: 2.2rem;
+        font-weight: 700;
+        color: #1f77b4;
+        margin-bottom: 0.5rem;
+        line-height: 1.2;
+    }
+    .kpi-trend {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.85rem;
+        font-weight: 500;
+    }
+    .trend-pill {
+        background-color: #d4edda;
+        color: #155724;
+        padding: 0.25rem 0.75rem;
+        border-radius: 1rem;
+        font-size: 0.8rem;
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.25rem;
+    }
+    .trend-pill.down {
+        background-color: #f8d7da;
+        color: #721c24;
+    }
     .trend-up {
         color: #28a745;
         font-weight: bold;
@@ -198,48 +247,76 @@ def main():
         median_price = filtered_stats['median_price']
         baseline_median = baseline_stats['median_price']
         trend_icon, trend_class = get_trend_indicator(median_price, baseline_median)
+        trend_direction = "up" if median_price > baseline_median else "down"
         
-        st.metric(
-            label="Median Sale Price",
-            value=format_currency(median_price),
-            delta=f"{trend_icon} {format_currency(abs(median_price - baseline_median))} vs overall"
-        )
+        st.markdown(f"""
+        <div class="kpi-card">
+            <div class="kpi-title">Median Sale Price</div>
+            <div class="kpi-value">{format_currency(median_price)}</div>
+            <div class="kpi-trend">
+                <span class="trend-pill {'down' if trend_direction == 'down' else ''}">
+                    {trend_icon} {format_currency(abs(median_price - baseline_median))} vs overall
+                </span>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
     
     with col2:
         # Average Price per SqFt
         avg_price_per_sqft = filtered_stats['avg_price_per_sqft']
         baseline_price_per_sqft = baseline_stats['avg_price_per_sqft']
         trend_icon, trend_class = get_trend_indicator(avg_price_per_sqft, baseline_price_per_sqft)
+        trend_direction = "up" if avg_price_per_sqft > baseline_price_per_sqft else "down"
         
-        st.metric(
-            label="Avg. Price per SqFt",
-            value=f"${avg_price_per_sqft:.0f}",
-            delta=f"{trend_icon} ${abs(avg_price_per_sqft - baseline_price_per_sqft):.0f} vs overall"
-        )
+        st.markdown(f"""
+        <div class="kpi-card">
+            <div class="kpi-title">Avg. Price per SqFt</div>
+            <div class="kpi-value">${avg_price_per_sqft:.0f}</div>
+            <div class="kpi-trend">
+                <span class="trend-pill {'down' if trend_direction == 'down' else ''}">
+                    {trend_icon} ${abs(avg_price_per_sqft - baseline_price_per_sqft):.0f} vs overall
+                </span>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
     
     with col3:
         # Total Properties Sold
         total_properties = filtered_stats['total_properties']
         baseline_total = baseline_stats['total_properties']
         trend_icon, trend_class = get_trend_indicator(total_properties, baseline_total)
+        trend_direction = "up" if total_properties > baseline_total else "down"
         
-        st.metric(
-            label="Total Properties Sold",
-            value=f"{total_properties:,}",
-            delta=f"{trend_icon} {abs(total_properties - baseline_total):,} vs overall"
-        )
+        st.markdown(f"""
+        <div class="kpi-card">
+            <div class="kpi-title">Total Properties Sold</div>
+            <div class="kpi-value">{total_properties:,}</div>
+            <div class="kpi-trend">
+                <span class="trend-pill {'down' if trend_direction == 'down' else ''}">
+                    {trend_icon} {abs(total_properties - baseline_total):,} vs overall
+                </span>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
     
     with col4:
         # Average Overall Quality
         avg_quality = filtered_stats['avg_quality']
         baseline_quality = baseline_stats['avg_quality']
         trend_icon, trend_class = get_trend_indicator(avg_quality, baseline_quality)
+        trend_direction = "up" if avg_quality > baseline_quality else "down"
         
-        st.metric(
-            label="Average Overall Quality",
-            value=f"{avg_quality:.1f}/10",
-            delta=f"{trend_icon} {abs(avg_quality - baseline_quality):.1f} vs overall"
-        )
+        st.markdown(f"""
+        <div class="kpi-card">
+            <div class="kpi-title">Average Overall Quality</div>
+            <div class="kpi-value">{avg_quality:.1f}/10</div>
+            <div class="kpi-trend">
+                <span class="trend-pill {'down' if trend_direction == 'down' else ''}">
+                    {trend_icon} {abs(avg_quality - baseline_quality):.1f} vs overall
+                </span>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
     
     # Charts Grid (2x2 Layout)
     st.subheader("📈 Market Analysis Charts")
@@ -321,7 +398,7 @@ def main():
         )
         
         fig_bar.update_layout(height=400)
-        fig_bar.update_yaxes(tickformat='$,.0f')
+        fig_bar.update_yaxes(tickformat='$,.0f')  # Fixed method name for currency formatting
         st.plotly_chart(fig_bar, use_container_width=True)
     
     with col4:
