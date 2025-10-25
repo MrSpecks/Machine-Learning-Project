@@ -50,21 +50,21 @@ st.markdown("""
         border-left: 4px solid #1f77b4;
     }
     .kpi-card {
-        background-color: #ffffff;
+        background-color: var(--background-color);
         padding: 1.5rem;
         border-radius: 0.75rem;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
-        border: 1px solid #e1e5e9;
+        box-shadow: var(--card-shadow);
+        border: 1px solid var(--border-color);
         margin-bottom: 1rem;
         transition: box-shadow 0.2s ease-in-out;
     }
     .kpi-card:hover {
-        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15), 0 3px 6px rgba(0, 0, 0, 0.1);
+        box-shadow: var(--card-shadow-hover);
     }
     .kpi-title {
         font-size: 0.9rem;
         font-weight: 600;
-        color: #6c757d;
+        color: var(--text-color-secondary);
         margin-bottom: 0.5rem;
         text-transform: uppercase;
         letter-spacing: 0.5px;
@@ -72,7 +72,7 @@ st.markdown("""
     .kpi-value {
         font-size: 2.2rem;
         font-weight: 700;
-        color: #1f77b4;
+        color: var(--primary-color);
         margin-bottom: 0.5rem;
         line-height: 1.2;
     }
@@ -84,8 +84,8 @@ st.markdown("""
         font-weight: 500;
     }
     .trend-pill {
-        background-color: #d4edda;
-        color: #155724;
+        background-color: var(--success-color-light);
+        color: var(--success-color-dark);
         padding: 0.25rem 0.75rem;
         border-radius: 1rem;
         font-size: 0.8rem;
@@ -95,8 +95,52 @@ st.markdown("""
         gap: 0.25rem;
     }
     .trend-pill.down {
-        background-color: #f8d7da;
-        color: #721c24;
+        background-color: var(--error-color-light);
+        color: var(--error-color-dark);
+    }
+    
+    /* Theme-specific CSS variables */
+    :root {
+        --background-color: #ffffff;
+        --border-color: #e1e5e9;
+        --text-color-secondary: #6c757d;
+        --primary-color: #1f77b4;
+        --success-color-light: #d4edda;
+        --success-color-dark: #155724;
+        --error-color-light: #f8d7da;
+        --error-color-dark: #721c24;
+        --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+        --card-shadow-hover: 0 8px 15px rgba(0, 0, 0, 0.15), 0 3px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Dark theme overrides */
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --background-color: #262730;
+            --border-color: #3a3b4a;
+            --text-color-secondary: #a0a0a0;
+            --primary-color: #00d4aa;
+            --success-color-light: #1e3a2e;
+            --success-color-dark: #4ade80;
+            --error-color-light: #3a1e1e;
+            --error-color-dark: #f87171;
+            --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.3), 0 1px 3px rgba(0, 0, 0, 0.2);
+            --card-shadow-hover: 0 8px 15px rgba(0, 0, 0, 0.4), 0 3px 6px rgba(0, 0, 0, 0.3);
+        }
+    }
+    
+    /* Streamlit dark theme detection */
+    .stApp[data-theme="dark"] {
+        --background-color: #262730;
+        --border-color: #3a3b4a;
+        --text-color-secondary: #a0a0a0;
+        --primary-color: #00d4aa;
+        --success-color-light: #1e3a2e;
+        --success-color-dark: #4ade80;
+        --error-color-light: #3a1e1e;
+        --error-color-dark: #f87171;
+        --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.3), 0 1px 3px rgba(0, 0, 0, 0.2);
+        --card-shadow-hover: 0 8px 15px rgba(0, 0, 0, 0.4), 0 3px 6px rgba(0, 0, 0, 0.3);
     }
     .trend-up {
         color: #28a745;
